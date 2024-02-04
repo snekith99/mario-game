@@ -1,4 +1,4 @@
-# mario-s1-2022
+# Mario Game
 
 ## Instructions to run game 
 
