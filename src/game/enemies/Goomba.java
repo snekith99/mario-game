@@ -1,13 +1,5 @@
 package game.enemies;
 
-
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.behaviours.Monologue;
 import game.*;
 import game.actions.AttackAction;
@@ -17,6 +9,15 @@ import game.waters.Effect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import engine.actions.Action;
+import engine.actions.ActionList;
+import engine.actions.DoNothingAction;
+import engine.actors.Actor;
+import engine.displays.Display;
+import engine.positions.GameMap;
+import engine.weapons.IntrinsicWeapon;
+
 import java.util.ArrayList;
 
 /**
@@ -27,6 +28,7 @@ public class Goomba extends Enemy implements Effect {
 	private static final char displayChar = 'g';
 	private static final int hitPoints = 20;
 	private int damage = 10;
+
 	/**
 	 * Constructor.
 	 */
@@ -36,8 +38,11 @@ public class Goomba extends Enemy implements Effect {
 		behaviours.put(10, new WanderBehaviour());
 		behaviours.put(6, new DrinkBehaviour());
 	}
+
 	/**
-	 * Allows an actor to gain actions that can be performed on this actor. Also contains behaviours that this actor can use.
+	 * Allows an actor to gain actions that can be performed on this actor. Also
+	 * contains behaviours that this actor can use.
+	 * 
 	 * @param otherActor the Actor that might perform an action.
 	 * @param direction  String representing the direction of the other Actor
 	 * @param map        current GameMap
@@ -46,7 +51,7 @@ public class Goomba extends Enemy implements Effect {
 	 */
 	@Override
 	public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-		//new action list that contains actions that the other actor can utilise
+		// new action list that contains actions that the other actor can utilise
 		ActionList actions = new ActionList();
 		// adds behaviours that this actor can use
 		behaviours.put(1, new AttackBehaviour(otherActor));
@@ -59,24 +64,27 @@ public class Goomba extends Enemy implements Effect {
 	}
 
 	/**
-	 * Implements resettable features, iterates through the behaviours and chooses what Goomba should do next.
+	 * Implements resettable features, iterates through the behaviours and chooses
+	 * what Goomba should do next.
+	 * 
 	 * @param actions    collection of possible Actions for this Actor
-	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param lastAction The Action this Actor took last turn. Can do interesting
+	 *                   things in conjunction with Action.getNextAction()
 	 * @param map        the map containing the Actor
 	 * @param display    the I/O object to which messages may be written
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-		if (this.hasCapability(Status.RESETTABLE)){
+		if (this.hasCapability(Status.RESETTABLE)) {
 			map.removeActor(this);
 			return new DoNothingAction();
 		}
 
-		//increment turn counter when player takes a turn
+		// increment turn counter when player takes a turn
 		turnCounter++;
 
-		//if conditional to have Goomba speak every 2 turns
+		// if conditional to have Goomba speak every 2 turns
 		if (turnCounter % 2 == 0) {
 
 			List<Monologue> goombaMonologue = this.generateMonologue();
@@ -88,7 +96,7 @@ public class Goomba extends Enemy implements Effect {
 			display.println(goombaMonologue.get(selection).printDetails());
 		}
 
-		for(Behaviour Behaviour : behaviours.values()) {
+		for (Behaviour Behaviour : behaviours.values()) {
 			Action action = Behaviour.getAction(this, map);
 
 			if (Utils.chance() <= 10) {
@@ -104,9 +112,10 @@ public class Goomba extends Enemy implements Effect {
 
 	/**
 	 * the complete monologue of Goomba
+	 * 
 	 * @return monologue
 	 */
-	public List<Monologue> generateMonologue(){
+	public List<Monologue> generateMonologue() {
 
 		sentences.add(new Monologue("Goomba: \"Mugga mugga!\""));
 		sentences.add(new Monologue("Goomba: \"Ugha ugha... (Never gonna run around and desert you...)\""));
@@ -116,7 +125,7 @@ public class Goomba extends Enemy implements Effect {
 
 	@Override
 	protected IntrinsicWeapon getIntrinsicWeapon() {
-		return new IntrinsicWeapon(damage,"kicks");
+		return new IntrinsicWeapon(damage, "kicks");
 	}
 
 	@Override

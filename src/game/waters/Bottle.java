@@ -1,9 +1,8 @@
 package game.waters;
 
-import edu.monash.fit2099.engine.actors.Actor;
+import engine.actors.Actor;
 import game.Status;
 import game.consumables.ConsumableItem;
-
 
 public class Bottle extends ConsumableItem {
     /**
@@ -25,15 +24,17 @@ public class Bottle extends ConsumableItem {
         // adding drink capability
         this.addCapability(Status.DRINK);
     }
+
     /**
      * Consumable features override
+     * 
      * @param actor actor to receive these perks
      * @return string of actor receiving perks
      */
     @Override
     public String consumableFeatures(Actor actor) {
         // checking if empty
-        if (BottleManager.getInstance().getBottle().isEmpty()){
+        if (BottleManager.getInstance().getBottle().isEmpty()) {
             return "Bottle is empty";
         }
         // otherwise drink the last water in fountain

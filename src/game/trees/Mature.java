@@ -1,9 +1,9 @@
 package game.trees;
 
-import edu.monash.fit2099.engine.positions.Location;
 import game.enemies.FlyingKoopa;
 import game.grounds.Dirt;
 import game.enemies.Koopa;
+import engine.positions.Location;
 import game.Status;
 import game.Utils;
 import game.resets.Resettable;
@@ -34,7 +34,6 @@ public class Mature extends Tree {
         super(DISPLAY_CHAR, NAME, FALL_DAMAGE, SUCCESS_RATE);
         counter = 0;
 
-
     }
 
     @Override
@@ -45,13 +44,13 @@ public class Mature extends Tree {
         // to spawn sapling randomly
         if (counter % 5 == 0) {
 
-            while (!condition){
+            while (!condition) {
 
                 // random exit
                 int i = Utils.randSpawn(location.getExits().size());
 
                 // checks if exits are fertile
-                if (location.getExits().get(i).getDestination().getGround().hasCapability(Status.FERTILE)){
+                if (location.getExits().get(i).getDestination().getGround().hasCapability(Status.FERTILE)) {
                     location.getExits().get(i).getDestination().setGround(new Sprout());
                     condition = true;
                 }
@@ -59,8 +58,8 @@ public class Mature extends Tree {
         }
 
         // removing mature if reset
-        if (this.hasCapability(Status.RESETTABLE)){
-            if(Utils.chance() <= 50){
+        if (this.hasCapability(Status.RESETTABLE)) {
+            if (Utils.chance() <= 50) {
                 location.setGround(new Dirt());
             }
             this.removeCapability(Status.RESETTABLE);
@@ -70,10 +69,9 @@ public class Mature extends Tree {
         if (Utils.chance() <= 15 && !location.containsAnActor()) {
 
             // FlyingKoopa or Koopa
-            if (Utils.chance() <= 50){
+            if (Utils.chance() <= 50) {
                 location.addActor(new FlyingKoopa());
-            }
-            else{
+            } else {
                 location.addActor(new Koopa());
             }
 
@@ -85,4 +83,3 @@ public class Mature extends Tree {
         }
     }
 }
-

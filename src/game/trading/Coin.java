@@ -1,7 +1,7 @@
 package game.trading;
 
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
+import engine.items.Item;
+import engine.positions.Location;
 import game.Status;
 import game.actions.CoinAction;
 import game.resets.Resettable;
@@ -26,9 +26,10 @@ public class Coin extends Item implements Resettable {
 
     /***
      * Constructor
+     * 
      * @param amount of coin being picked up
      */
-    public Coin(int amount){
+    public Coin(int amount) {
         super(NAME, DISPLAY_CHAR, PORTABLE);
         this.amount = amount;
 
@@ -41,6 +42,7 @@ public class Coin extends Item implements Resettable {
 
     /**
      * Getter for amount
+     * 
      * @return amount of coin
      */
     public int getAmount() {

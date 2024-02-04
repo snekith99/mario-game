@@ -1,10 +1,10 @@
 package game.actions;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
+import engine.actions.Action;
+import engine.actions.MoveActorAction;
+import engine.actors.Actor;
+import engine.positions.GameMap;
+import engine.positions.Location;
 import game.grounds.WarpPipe;
 
 public class TeleportAction extends Action {
@@ -13,6 +13,7 @@ public class TeleportAction extends Action {
 
     /**
      * Constructor
+     * 
      * @param sourcePipe
      */
 
@@ -23,7 +24,7 @@ public class TeleportAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (sourcePipe.getDestWarpPipe().getLocation().containsAnActor()){
+        if (sourcePipe.getDestWarpPipe().getLocation().containsAnActor()) {
             map.removeActor(sourcePipe.getDestWarpPipe().getLocation().getActor());
         }
         map.moveActor(actor, sourcePipe.getDestWarpPipe().getLocation());
@@ -34,6 +35,6 @@ public class TeleportAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " teleports " ;
+        return actor + " teleports ";
     }
 }

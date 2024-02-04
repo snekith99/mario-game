@@ -1,7 +1,7 @@
 package game.items;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
+import engine.actors.Actor;
+import engine.weapons.WeaponItem;
 import game.Status;
 import game.trading.Purchasable;
 
@@ -30,6 +30,7 @@ public class Wrench extends WeaponItem implements Purchasable {
      * Price of wrench to buy from toad
      */
     private final static int PRICE = 200;
+
     /**
      * Constructor
      */
@@ -42,9 +43,10 @@ public class Wrench extends WeaponItem implements Purchasable {
 
     /**
      * Getter for price of wrench
+     * 
      * @return price of wrench
      */
-    public int getPrice(){
+    public int getPrice() {
         return PRICE;
     }
 

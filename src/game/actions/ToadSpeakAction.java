@@ -1,13 +1,13 @@
 package game.actions;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import game.allies.Toad;
 import game.behaviours.Monologue;
 import game.Utils;
 import java.util.*;
 
+import engine.actions.Action;
+import engine.actors.Actor;
+import engine.positions.GameMap;
 
 public class ToadSpeakAction extends Action {
     /**
@@ -17,6 +17,7 @@ public class ToadSpeakAction extends Action {
 
     /**
      * Constructor
+     * 
      * @param toad object to print monologue
      */
     public ToadSpeakAction(Toad toad) {
@@ -30,7 +31,8 @@ public class ToadSpeakAction extends Action {
         // utils random number, Toad speaks one sentence at a time
         int selection = Utils.actorMonologueRandomize(toadMonologue.size());
 
-        // check if actor has item with while loop, will keep running until it's not null
+        // check if actor has item with while loop, will keep running until it's not
+        // null
         while (toadMonologue.get(selection).printToadDetails() == null) {
             selection = Utils.actorMonologueRandomize(toadMonologue.size());
         }
@@ -44,4 +46,3 @@ public class ToadSpeakAction extends Action {
         return actor + " talks with " + toad;
     }
 }
-

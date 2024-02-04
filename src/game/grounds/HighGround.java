@@ -1,9 +1,9 @@
 package game.grounds;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Ground;
-import edu.monash.fit2099.engine.positions.Location;
+import engine.actions.ActionList;
+import engine.actors.Actor;
+import engine.positions.Ground;
+import engine.positions.Location;
 import game.Status;
 import game.actions.JumpAction;
 import game.trading.Coin;
@@ -21,6 +21,7 @@ public abstract class HighGround extends Ground {
      * Name of HighGround
      */
     private final String name;
+
     /**
      * Constructor
      */
@@ -33,24 +34,27 @@ public abstract class HighGround extends Ground {
 
     /**
      * Getter for fallDamage
+     * 
      * @return fallDamage from HighGround
      */
-    public int getFallDamage(){
+    public int getFallDamage() {
         return fallDamage;
     }
 
     /**
      * Getter for successRate
+     * 
      * @return successRate of HighGround
      */
-    public int getSuccessRate(){
+    public int getSuccessRate() {
         return successRate;
     }
 
     /**
      * Actions that are given to the actor
-     * @param actor the Actor acting
-     * @param location the current Location
+     * 
+     * @param actor     the Actor acting
+     * @param location  the current Location
      * @param direction the direction of the Ground from the Actor
      * @return action list
      */
@@ -60,10 +64,10 @@ public abstract class HighGround extends Ground {
         // Creating actionList
         ActionList actions = new ActionList();
 
-        if (location.containsAnActor()){
+        if (location.containsAnActor()) {
 
             // check if actor is invincible
-            if (actor.hasCapability(Status.INVINCIBLE)){
+            if (actor.hasCapability(Status.INVINCIBLE)) {
 
                 // Destroy to dirt and drop $5
                 location.setGround(new Dirt());
@@ -73,7 +77,7 @@ public abstract class HighGround extends Ground {
         }
 
         // Regular JumpAction otherwise
-        if (!(actor.hasCapability(Status.INVINCIBLE))||!(actor.hasCapability(Status.FLYING))){
+        if (!(actor.hasCapability(Status.INVINCIBLE)) || !(actor.hasCapability(Status.FLYING))) {
             actions.add(new JumpAction(this, direction, location));
         }
         return actions;
@@ -87,6 +91,6 @@ public abstract class HighGround extends Ground {
 
     @Override
     public boolean canActorEnter(Actor actor) {
-        return actor.hasCapability(Status.INVINCIBLE)||actor.hasCapability(Status.FLYING);
+        return actor.hasCapability(Status.INVINCIBLE) || actor.hasCapability(Status.FLYING);
     }
 }

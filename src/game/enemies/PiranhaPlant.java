@@ -1,12 +1,5 @@
 package game.enemies;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Status;
 import game.Utils;
 import game.actions.AttackAction;
@@ -18,6 +11,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import engine.actions.Action;
+import engine.actions.ActionList;
+import engine.actions.DoNothingAction;
+import engine.actors.Actor;
+import engine.displays.Display;
+import engine.positions.GameMap;
+import engine.weapons.IntrinsicWeapon;
 
 public class PiranhaPlant extends Enemy {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>(); // priority, behaviour
@@ -40,10 +41,10 @@ public class PiranhaPlant extends Enemy {
             this.increaseMaxHp(50);
             return new DoNothingAction();
         }
-        //increment turn counter when player takes a turn
+        // increment turn counter when player takes a turn
         turnCounter++;
 
-        //if conditional to have Piranha Plant speak every 2 turns
+        // if conditional to have Piranha Plant speak every 2 turns
         if (turnCounter % 2 == 0) {
 
             List<Monologue> piranhaPlantMonologue = this.generateMonologue();
@@ -62,12 +63,10 @@ public class PiranhaPlant extends Enemy {
         return new DoNothingAction();
     }
 
-    
-
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
 
-        //new action list that contains actions that the other actor can utilise
+        // new action list that contains actions that the other actor can utilise
         ActionList actions = new ActionList();
 
         // adds behaviours that this actor can use
@@ -80,7 +79,7 @@ public class PiranhaPlant extends Enemy {
 
         return actions;
 
-        }
+    }
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
@@ -89,6 +88,7 @@ public class PiranhaPlant extends Enemy {
 
     /**
      * the complete monologue of Piranha Plant
+     * 
      * @return monologue
      */
 
@@ -98,6 +98,4 @@ public class PiranhaPlant extends Enemy {
         return sentences;
     }
 
-
 }
-

@@ -1,11 +1,12 @@
 package game.waters;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.RefillAction;
 import java.util.Stack;
+
+import engine.actions.ActionList;
+import engine.actors.Actor;
+import engine.positions.Location;
 
 import static game.Utils.HEALING_POINTS;
 
@@ -18,6 +19,7 @@ public class HealthFountain extends Fountain {
      * displayChar of HealthWater
      */
     private static final char DISPLAY_CHAR = 'H';
+
     /**
      * Constructor
      *
@@ -25,7 +27,7 @@ public class HealthFountain extends Fountain {
     public HealthFountain() {
         super(DISPLAY_CHAR);
         this.addCapability(Status.FOUNTAIN);
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             fountains.push(new Water(this));
         }
 
@@ -65,13 +67,12 @@ public class HealthFountain extends Fountain {
         return actions;
     }
 
-
     @Override
     public void tick(Location location) {
-        if (fountains.isEmpty()){
+        if (fountains.isEmpty()) {
             counter++;
-            if (counter == 10){
-                for (int i = 0; i < 10; i++){
+            if (counter == 10) {
+                for (int i = 0; i < 10; i++) {
                     fountains.add(new Water(this));
                 }
                 counter = 0;
@@ -80,7 +81,7 @@ public class HealthFountain extends Fountain {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return NAME;
     }
 }

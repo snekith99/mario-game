@@ -1,8 +1,9 @@
 package game.waters;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Ground;
 import java.util.Stack;
+
+import engine.actors.Actor;
+import engine.positions.Ground;
 
 abstract public class Fountain extends Ground {
 

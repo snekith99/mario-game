@@ -1,13 +1,5 @@
 package game.enemies;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.Utils;
 import game.behaviours.*;
 import game.Status;
@@ -19,6 +11,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import engine.actions.Action;
+import engine.actions.ActionList;
+import engine.actions.DoNothingAction;
+import engine.actors.Actor;
+import engine.displays.Display;
+import engine.positions.GameMap;
+import engine.positions.Location;
+import engine.weapons.IntrinsicWeapon;
 
 public class Bowser extends Enemy {
     private static final String NAME = "Bowser";
@@ -39,7 +40,7 @@ public class Bowser extends Enemy {
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
 
-        if (this.hasCapability(Status.RESETTABLE)){
+        if (this.hasCapability(Status.RESETTABLE)) {
             this.heal(HIT_POINTS);
 
             if (!location.containsAnActor()) {
@@ -49,10 +50,10 @@ public class Bowser extends Enemy {
             }
 
         }
-        //increment turn counter when player takes a turn
+        // increment turn counter when player takes a turn
         turnCounter++;
 
-        //if conditional to have actor talk every alternate turn
+        // if conditional to have actor talk every alternate turn
         if (turnCounter % 2 == 0) {
 
             List<Monologue> bowserMonologue = this.generateMonologue();
@@ -64,7 +65,7 @@ public class Bowser extends Enemy {
             display.println(bowserMonologue.get(selection).printDetails());
         }
 
-        for(Behaviour Behaviour : behaviours.values()) {
+        for (Behaviour Behaviour : behaviours.values()) {
             Action action = Behaviour.getAction(this, map);
             if (action != null)
                 return action;
@@ -75,7 +76,7 @@ public class Bowser extends Enemy {
 
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        //new action list that contains actions that the other actor can utilise
+        // new action list that contains actions that the other actor can utilise
         ActionList actions = new ActionList();
         // adds behaviours that this actor can use
         this.behaviours.put(1, new AttackBehaviour(otherActor));
@@ -90,16 +91,18 @@ public class Bowser extends Enemy {
 
     @Override
     protected IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(80,"punches");
+        return new IntrinsicWeapon(80, "punches");
     }
 
     /**
      * The complete monologue of Bowser
+     * 
      * @return The monologue
      */
-    public List<Monologue> generateMonologue(){
+    public List<Monologue> generateMonologue() {
         sentences.add(new Monologue("Bowser: \"What was that sound? Oh, just a fire.\""));
-        sentences.add(new Monologue("Bowser: \"Princess Peach! You are formally invited... to the creation of my new kingdom!\""));
+        sentences.add(new Monologue(
+                "Bowser: \"Princess Peach! You are formally invited... to the creation of my new kingdom!\""));
         sentences.add(new Monologue("Bowser: \"Never gonna let you down!\""));
         sentences.add(new Monologue("Bowser: \"Wrrrrrrrrrrrrrrrryyyyyyyyyyyyyy!!!!\""));
         return sentences;

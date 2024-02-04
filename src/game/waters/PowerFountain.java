@@ -1,13 +1,14 @@
 package game.waters;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Location;
 import game.Status;
 import game.actions.DrinkAction;
 import game.actions.RefillAction;
 
 import java.util.Stack;
+
+import engine.actions.ActionList;
+import engine.actors.Actor;
+import engine.positions.Location;
 
 import static game.Utils.ATTACKING_POINTS;
 
@@ -28,7 +29,7 @@ public class PowerFountain extends Fountain {
         super(DISPLAY_CHAR);
         this.addCapability(Status.FOUNTAIN);
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             fountains.add(new Water(this));
         }
     }
@@ -67,10 +68,10 @@ public class PowerFountain extends Fountain {
 
     @Override
     public void tick(Location location) {
-        if (fountains.isEmpty()){
+        if (fountains.isEmpty()) {
             counter++;
-            if (counter == 10){
-                for (int i = 0; i < 10; i++){
+            if (counter == 10) {
+                for (int i = 0; i < 10; i++) {
                     fountains.add(new Water(this));
                 }
             }
@@ -79,9 +80,8 @@ public class PowerFountain extends Fountain {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return NAME;
     }
-
 
 }

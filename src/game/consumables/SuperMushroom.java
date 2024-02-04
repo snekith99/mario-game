@@ -1,7 +1,7 @@
 package game.consumables;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
+import engine.actors.Actor;
+import engine.items.Item;
 import game.Status;
 import game.trading.Purchasable;
 
@@ -32,6 +32,7 @@ public class SuperMushroom extends ConsumableItem implements Purchasable {
 
     /**
      * Features that will be given to actor once the item has been consumed
+     * 
      * @param actor actor to receive these perks
      */
     @Override
@@ -47,10 +48,11 @@ public class SuperMushroom extends ConsumableItem implements Purchasable {
 
     /**
      * Getter for price
+     * 
      * @return price of consumableItem
      */
     @Override
-    public int getPrice(){
+    public int getPrice() {
         return PRICE;
     }
 

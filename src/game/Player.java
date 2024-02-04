@@ -1,12 +1,12 @@
 package game;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.displays.Menu;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import engine.actions.Action;
+import engine.actions.ActionList;
+import engine.actors.Actor;
+import engine.displays.Display;
+import engine.displays.Menu;
+import engine.positions.GameMap;
+import engine.weapons.IntrinsicWeapon;
 import game.resets.ResetAction;
 import game.resets.ResetManager;
 import game.resets.Resettable;
@@ -16,7 +16,7 @@ import game.waters.Effect;
 /**
  * Class representing the Player.
  */
-public class Player extends Actor  implements Resettable, Effect {
+public class Player extends Actor implements Resettable, Effect {
 	private final Menu menu = new Menu();
 	private int invincibleEffectCounter = 10;
 	private int fireEffectCounter = 20;
@@ -40,20 +40,24 @@ public class Player extends Actor  implements Resettable, Effect {
 	}
 
 	/**
-	 * Contains resettable features, and capabilities of the player that are used within the game once it is the player's turn to act
+	 * Contains resettable features, and capabilities of the player that are used
+	 * within the game once it is the player's turn to act
+	 * 
 	 * @param actions    collection of possible Actions for this Actor
-	 * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+	 * @param lastAction The Action this Actor took last turn. Can do interesting
+	 *                   things in conjunction with Action.getNextAction()
 	 * @param map        the map containing the Actor
 	 * @param display    the I/O object to which messages may be written
 	 * @return
 	 */
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-		if (!(ResetManager.getInstance().hasReset())){
+		if (!(ResetManager.getInstance().hasReset())) {
 			actions.add(new ResetAction());
 		}
-		// Implementation of resettable features of player once reset action has been executed
-		if (this.hasCapability(Status.RESETTABLE)){
+		// Implementation of resettable features of player once reset action has been
+		// executed
+		if (this.hasCapability(Status.RESETTABLE)) {
 			this.resetMaxHp(this.getMaxHp());
 			this.removeCapability(Status.INVINCIBLE);
 			this.removeCapability(Status.TALL);
@@ -67,21 +71,22 @@ public class Player extends Actor  implements Resettable, Effect {
 			return lastAction.getNextAction();
 
 		// return/print the console menu
-		display.println(this + this.printHp() + " at " + "(" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ")");
+		display.println(this + this.printHp() + " at " + "(" + map.locationOf(this).x() + ", "
+				+ map.locationOf(this).y() + ")");
 
 		// Mario is INVINCIBLE!
-		if (this.hasCapability(Status.INVINCIBLE)){
+		if (this.hasCapability(Status.INVINCIBLE)) {
 			display.println(this + " is INVINCIBLE!");
 			this.invincibleEffectCounter--;
-			if (this.invincibleEffectCounter == 0){
+			if (this.invincibleEffectCounter == 0) {
 				this.removeCapability(Status.INVINCIBLE);
 			}
 		}
 
-		if (this.hasCapability(Status.FIRE)){
+		if (this.hasCapability(Status.FIRE)) {
 			display.println(this + " has FIRE ATTACK!");
 			this.fireEffectCounter--;
-			if (this.fireEffectCounter == 0){
+			if (this.fireEffectCounter == 0) {
 				this.removeCapability(Status.FIRE);
 			}
 		}
@@ -92,8 +97,8 @@ public class Player extends Actor  implements Resettable, Effect {
 	}
 
 	@Override
-	public char getDisplayChar(){
-		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()): super.getDisplayChar();
+	public char getDisplayChar() {
+		return this.hasCapability(Status.TALL) ? Character.toUpperCase(super.getDisplayChar()) : super.getDisplayChar();
 	}
 
 	@Override
@@ -116,4 +121,3 @@ public class Player extends Actor  implements Resettable, Effect {
 		this.damage += attackPoints;
 	}
 }
-

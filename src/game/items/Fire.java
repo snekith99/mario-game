@@ -1,7 +1,7 @@
 package game.items;
 
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
+import engine.items.Item;
+import engine.positions.Location;
 
 public class Fire extends Item {
     private static final String NAME = "Fire";
@@ -22,12 +22,12 @@ public class Fire extends Item {
         counter++;
 
         // after 3 turns, it will remove the fire from the map
-        if (counter == 3){
+        if (counter == 3) {
             location.removeItem(this);
         }
 
         // any actor who stands on the fire will lose 20 HP
-        if (location.containsAnActor()){
+        if (location.containsAnActor()) {
             location.getActor().hurt(20);
         }
     }

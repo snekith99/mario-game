@@ -1,14 +1,15 @@
 package game.resets;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
+import engine.actions.Action;
+import engine.actors.Actor;
+import engine.positions.GameMap;
 
 public class ResetAction extends Action {
     /**
      * Runs the Reset Manager to reset all instances that are resettable
+     * 
      * @param actor The actor performing the action.
-     * @param map The map the actor is on.
+     * @param map   The map the actor is on.
      * @return
      */
     @Override

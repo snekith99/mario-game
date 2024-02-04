@@ -1,11 +1,10 @@
 package game.consumables;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
-import edu.monash.fit2099.engine.positions.Location;
+import engine.actors.Actor;
+import engine.items.Item;
+import engine.positions.Location;
 import game.Status;
 import game.trading.Purchasable;
-
 
 public class PowerStar extends ConsumableItem implements Purchasable {
     /**
@@ -38,8 +37,9 @@ public class PowerStar extends ConsumableItem implements Purchasable {
 
     /**
      * Tick method that contains the counter for powerstar holding item
+     * 
      * @param currentLocation The location of the actor carrying this Item.
-     * @param actor The actor carrying this Item.
+     * @param actor           The actor carrying this Item.
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
@@ -55,7 +55,9 @@ public class PowerStar extends ConsumableItem implements Purchasable {
     }
 
     /**
-     * Tick method that contains the counter for powerstar on the ground, which will disappear once the counter reaches 0
+     * Tick method that contains the counter for powerstar on the ground, which will
+     * disappear once the counter reaches 0
+     * 
      * @param currentLocation The location of the ground on which we lie.
      */
     @Override
@@ -70,7 +72,6 @@ public class PowerStar extends ConsumableItem implements Purchasable {
         }
     }
 
-
     @Override
     public String consumableFeatures(Actor actor) {
         // Add invincibility status
@@ -81,16 +82,17 @@ public class PowerStar extends ConsumableItem implements Purchasable {
     }
 
     @Override
-    public int getFade(){
+    public int getFade() {
         return fadeCounter;
     }
 
     /**
      * Getter for price
+     * 
      * @return price of consumableItem
      */
     @Override
-    public int getPrice(){
+    public int getPrice() {
         return PRICE;
     }
 

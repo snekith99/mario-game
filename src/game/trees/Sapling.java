@@ -1,6 +1,6 @@
 package game.trees;
 
-import edu.monash.fit2099.engine.positions.Location;
+import engine.positions.Location;
 import game.*;
 import game.grounds.Dirt;
 import game.consumables.FireFlower;
@@ -24,6 +24,7 @@ public class Sapling extends Tree implements Resettable {
      * successRate of Sapling
      */
     private static final int SUCCESS_RATE = 80;
+
     /**
      * Constructor
      */
@@ -33,13 +34,13 @@ public class Sapling extends Tree implements Resettable {
     }
 
     @Override
-    public void tick(Location location){
+    public void tick(Location location) {
         counter++;
 
         // from sapling to mature
-        if(counter %  10 == 0){
+        if (counter % 10 == 0) {
             location.setGround(new Mature());
-            if (Utils.chance() <= 50){
+            if (Utils.chance() <= 50) {
                 location.addItem(new FireFlower());
             }
         }
@@ -50,12 +51,11 @@ public class Sapling extends Tree implements Resettable {
         }
 
         // removing sapling if reset
-        if (this.hasCapability(Status.RESETTABLE)){
-            if (Utils.chance() <= 50){
+        if (this.hasCapability(Status.RESETTABLE)) {
+            if (Utils.chance() <= 50) {
                 location.setGround(new Dirt());
             }
             this.removeCapability(Status.RESETTABLE);
         }
     }
 }
-

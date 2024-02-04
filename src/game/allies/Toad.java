@@ -1,8 +1,5 @@
 package game.allies;
 
-import edu.monash.fit2099.engine.actions.ActionList;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.BottleAction;
 import game.actions.PurchaseAction;
 import game.behaviours.Monologue;
@@ -14,6 +11,10 @@ import game.items.Wrench;
 import game.waters.BottleManager;
 
 import java.util.*;
+
+import engine.actions.ActionList;
+import engine.actors.Actor;
+import engine.positions.GameMap;
 
 public class Toad extends Ally {
     private static final String NAME = "Toad";
@@ -28,15 +29,18 @@ public class Toad extends Ally {
     }
 
     /**
-     * The complete monologue of Toad which can be accessed if certain conditions of player are met.
+     * The complete monologue of Toad which can be accessed if certain conditions of
+     * player are met.
      *
      * @param actor the actor toad is talking to
      * @return The monologue
      */
     public List<Monologue> generateMonologue(Actor actor) {
 
-        sentences.add(new Monologue("Toad: You might need a wrench to smash Koopa's hard shells", !actor.hasCapability(Status.DORMANTKILL)));
-        sentences.add(new Monologue("Toad: You better get back to finding Power Stars.", !actor.hasCapability(Status.INVINCIBLE)));
+        sentences.add(new Monologue("Toad: You might need a wrench to smash Koopa's hard shells",
+                !actor.hasCapability(Status.DORMANTKILL)));
+        sentences.add(new Monologue("Toad: You better get back to finding Power Stars.",
+                !actor.hasCapability(Status.INVINCIBLE)));
         sentences.add(new Monologue("Toad: The Princess is depending on you! You are our only hope."));
         sentences.add(new Monologue("Toad: Being imprisoned in these walls can drive a fungus crazy :("));
         return sentences;

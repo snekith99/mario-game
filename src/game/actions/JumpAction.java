@@ -1,11 +1,11 @@
 package game.actions;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.MoveActorAction;
-import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import game.grounds.HighGround;
+import engine.actions.Action;
+import engine.actions.MoveActorAction;
+import engine.actors.Actor;
+import engine.positions.GameMap;
+import engine.positions.Location;
 import game.Status;
 import game.Utils;
 
@@ -14,28 +14,32 @@ public class JumpAction extends Action {
     private final String direction;
     private final Location location;
 
-
     /**
      * Constructor
+     * 
      * @param highGround high ground
-     * @param direction direction of high ground from actor
-     * @param location location of high ground
+     * @param direction  direction of high ground from actor
+     * @param location   location of high ground
      */
     public JumpAction(HighGround highGround, String direction, Location location) {
         this.highGround = highGround;
         this.direction = direction;
         this.location = location;
     }
+
     /**
-     * Execute function for jump action, allows actor to jump with certain features with capabilities.
+     * Execute function for jump action, allows actor to jump with certain features
+     * with capabilities.
+     * 
      * @param actor The actor performing the action.
-     * @param map The map the actor is on.
+     * @param map   The map the actor is on.
      */
     @Override
     public String execute(Actor actor, GameMap map) {
         int damage = highGround.getFallDamage();
-        // Allows actor who consumed super mushroom to have 100% successrate and no fall damage
-        if (actor.hasCapability(Status.TALL)){
+        // Allows actor who consumed super mushroom to have 100% successrate and no fall
+        // damage
+        if (actor.hasCapability(Status.TALL)) {
             MoveActorAction moveActor = new MoveActorAction(location, direction);
             moveActor.execute(actor, map);
             return actor + " jumped and is standing on top of " + highGround;

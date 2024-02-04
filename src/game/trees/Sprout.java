@@ -1,6 +1,6 @@
 package game.trees;
 
-import edu.monash.fit2099.engine.positions.Location;
+import engine.positions.Location;
 import game.Status;
 import game.enemies.Goomba;
 import game.Utils;
@@ -25,6 +25,7 @@ public class Sprout extends Tree implements Resettable {
      * successRate of Sprout
      */
     private static final int SUCCESS_RATE = 90;
+
     /**
      * Constructor.
      */
@@ -34,13 +35,13 @@ public class Sprout extends Tree implements Resettable {
     }
 
     @Override
-    public void tick(Location location){
+    public void tick(Location location) {
         counter++;
 
         // from sprout to sapling
-        if (counter %  10 == 0){
+        if (counter % 10 == 0) {
             location.setGround(new Sapling());
-            if (Utils.chance() <= 50){
+            if (Utils.chance() <= 50) {
                 location.addItem(new FireFlower());
             }
         }
@@ -51,8 +52,8 @@ public class Sprout extends Tree implements Resettable {
         }
 
         // removing sprout if reset
-        if (this.hasCapability(Status.RESETTABLE)){
-            if (Utils.chance() <= 50){
+        if (this.hasCapability(Status.RESETTABLE)) {
+            if (Utils.chance() <= 50) {
                 location.setGround(new Dirt());
             }
 
